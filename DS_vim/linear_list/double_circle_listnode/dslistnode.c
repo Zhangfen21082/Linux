@@ -44,7 +44,7 @@ void listnodePopBack(dcnode* pd)
   }
   dcnode* tail=pd->prev;
   pd->prev=tail->prev;
-  tail->next=pd;
+  tail->prev->next=pd;
   free(tail);
 
 
@@ -57,5 +57,54 @@ void listnodePushHead(dcnode* pd,DataType x)
   NewNode->prev=pd;
   pd->next->prev=NewNode;
   pd->next=NewNode;
+
+}
+
+
+void listnodePopHead(dcnode* pd)
+{
+  assert(pd);
+  dcnode* head=pd->next;
+  pd->next=head->next;
+  head->next->prev=pd;
+
+
+}
+
+
+dcnode* find(dcnode* pd,DataType x)
+{
+  assert(pd);
+  dcnode* head=pd->next;
+  while(head!=pd)
+  {
+    if(head->val==x)
+      break;
+    head=head->next;
+  }
+  return head;
+}
+
+void listnodeInsert(dcnode* pd,DataType pos,DataType x)
+{
+  assert(pd);
+  dcnode* NewNode=creat(x);
+  dcnode* front=find(pd,pos);
+
+  NewNode->next=front->next;
+  NewNode->prev=front;
+  front->next=NewNode;
+  NewNode->next->prev=NewNode;
+
+}
+void listnodeRemove(dcnode* pd,DataType pos)
+{
+  assert(pd);
+  dcnode*  index=find(pd,pos);
+  dcnode* front=index->prev;
+  dcnode* behind=index->next;
+  front->next=behind;
+  behind->prev=front;
+  free(index);
 
 }

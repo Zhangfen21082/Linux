@@ -27,6 +27,27 @@ void test()
  listnodePushHead(head,8);
  print(head);
  printf("\n");
+
+ printf("头删2个结点\n");
+ listnodePopHead(head);
+ listnodePopHead(head);
+ print(head);
+ printf("\n");
+
+ printf("找元素5\n");
+ printf("%d \n",(find(head,5)->val));
+ printf("\n");
+
+ printf("在5后面插入元素9\n");
+ listnodeInsert(head,5,9);
+ print(head);
+ printf("\n");
+
+ printf("删除元素9\n");
+ listnodeRemove(head,9);
+ print(head);
+ printf("\n");
+
 }
 
 
